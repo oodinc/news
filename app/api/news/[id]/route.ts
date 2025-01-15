@@ -4,15 +4,12 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 // Get Detail News by ID
-export async function GET(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
+export async function GET(req: Request, context: { params: { id: string } }) {
   try {
-    const { id } = params;
+    const { id } = context.params;
 
     const news = await prisma.news.findUnique({
-      where: { id: Number(id) },
+      where: { id: Number(id) }, 
     });
 
     if (!news) {
