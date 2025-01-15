@@ -8,7 +8,7 @@ export async function GET() {
   try {
     const news = await prisma.news.findMany();
     return NextResponse.json(news);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to fetch news' }, { status: 500 });
   }
 }
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
       },
     });
     return NextResponse.json(newNews);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to create news' }, { status: 500 });
   }
 }
@@ -45,7 +45,7 @@ export async function PUT(req: Request) {
       },
     });
     return NextResponse.json(updatedNews);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to update news' }, { status: 500 });
   }
 }
@@ -58,7 +58,7 @@ export async function DELETE(req: Request) {
       where: { id: id },
     });
     return NextResponse.json({ message: 'News deleted successfully' });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to delete news' }, { status: 500 });
   }
 }
