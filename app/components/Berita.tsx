@@ -2,9 +2,17 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Berita = () => {
-  const [news, setNews] = useState<any[]>([]);
+  interface NewsItem {
+    id: string;
+    title: string;
+    publishedAt: string;
+    image?: string;
+  }
+
+  const [news, setNews] = useState<NewsItem[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,9 +45,15 @@ const Berita = () => {
               >
                 <div className="w-full h-56 bg-gray-200">
                   {item.image && (
-                    <img
-                      src={item.image}
+                    <Image
+                      src={
+                        item.image.startsWith("http")
+                          ? item.image
+                          : `/${item.image}`
+                      }
                       alt={item.title}
+                      width={80}
+                      height={80}
                       className="w-full h-full object-cover"
                     />
                   )}

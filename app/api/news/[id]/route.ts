@@ -9,7 +9,8 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const id = params.id;
+    // Await the params to ensure they are fully resolved before use
+    const { id } = await params;  // this line ensures that params is awaited
     const news = await prisma.news.findUnique({
       where: { id: Number(id) },
     });
@@ -19,10 +20,7 @@ export async function GET(
     }
 
     return NextResponse.json(news);
-  } catch (error) {
-    return NextResponse.json(
-      { error: "Failed to fetch news detail" },
-      { status: 500 }
-    );
+  } catch {
+    return NextResponse.json({ error: "Failed to fetch news" }, { status: 500 });
   }
 }
