@@ -71,7 +71,7 @@ const Berita = () => {
                   </p>
                   <div className="mt-auto text-right">
                     <Link
-                      href={`/berita/${item.id}`}
+                      href={``}
                       className="text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors"
                     >
                       Selengkapnya →
