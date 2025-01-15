@@ -9,8 +9,8 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    // Await the params to ensure they are fully resolved before use
-    const { id } = await params;  // this line ensures that params is awaited
+    const { id } = params;
+
     const news = await prisma.news.findUnique({
       where: { id: Number(id) },
     });
